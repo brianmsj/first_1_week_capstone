@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL ||
-                       global.DATABASE_URL || 'mongodb://localhost/fullstack-primer'; 
+                       global.DATABASE_URL || 'mongodb://localhost/fullstack-primer';
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
@@ -21,23 +21,32 @@ app.get('/cheeses', (req, res) => {
   Cheese
   .find()
   .exec()
-  .then(cheeses => res.json({cheeses}));
+  .then(cheeses => res.json({ cheeses: cheeses[0].types }))
+  .catch(console.error);
 });
 
 function runServer() {
     return new Promise((resolve, reject) => {
-        app.listen(PORT, HOST, (err) => {
-            if (err) {
-                console.error(err);
-                reject(err);
-            }
+      mongoose.connect(DATABASE_URL, err => {
+        if(err) {
+          return reject(err);
+        }
+        console.log('Db connected');
 
-            const host = HOST || 'localhost';
-            console.log(`Listening on ${host}:${PORT}`);
-        });
+        app.listen(PORT, HOST, (err) => {
+          if (err) {
+            console.error(err);
+            reject(err);
+          }
+          const host = HOST || 'localhost';
+          console.log(`Listening on ${host}:${PORT}`);
+         });
+      });
     });
 }
 
 if (require.main === module) {
-    runServer();
+    runServer()
+    .catch(console.error);
+
 }
