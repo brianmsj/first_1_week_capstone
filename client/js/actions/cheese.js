@@ -20,7 +20,7 @@ export const fetchCheesesError = (error) => ({
 export const fetchCheeses = () => dispatch => {
     dispatch(fetchCheesesRequest());
 
-    fetch('http://localhost:8080/cheeses')
+    fetch('https://fullstack-primer.herokuapp.com/cheeses')
     .then(response => response.json())
     .then(data => {
       dispatch(fetchCheesesSuccess(data.cheeses));
