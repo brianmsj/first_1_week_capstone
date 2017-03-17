@@ -3,8 +3,12 @@ import express from 'express';
 const bodyParser = require('body-parser');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || 8080;
+DATABASE_URL = process.env.DATABASE_URL ||
+                       global.DATABASE_URL;
 const router = express.Router();
 const jsonParser = bodyParser.json();
+const mongoose = require('mongoose');
+const {Cheese} = require('./models');
 
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 
@@ -12,30 +16,12 @@ const app = express();
 
 app.use(express.static(process.env.CLIENT_PATH));
 
-const cheeses = [
-    "Bath Blue",
-    "Barkham Blue",
-    "Buxton Blue",
-    "Cheshire Blue",
-    "Devon Blue",
-    "Dorset Blue Vinney",
-    "Dovedale",
-    "Exmoor Blue",
-    "Harbourne Blue",
-    "Lanark Blue",
-    "Lymeswold",
-    "Oxford Blue",
-    "Shropshire Blue",
-    "Stichelton",
-    "Stilton",
-    "Blue Wensleydale",
-    "Yorkshire Blue"
-];
 
 app.get('/cheeses', (req, res) => {
-  res.json({
-    cheeses
-  });
+  Cheese
+  .find()
+  .exec()
+  .then(cheeses => res.json({cheeses}));
 });
 
 function runServer() {
