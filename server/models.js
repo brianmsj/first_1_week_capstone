@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 // this is our schema to represent a restaurant
 const cheeseSchema = mongoose.Schema({
-  type: [String]
+  types: [String]
 })
 
 

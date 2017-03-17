@@ -1,4 +1,4 @@
-
+import { API_URL } from '../config';
 
 export const FETCH_CHEESES_REQUEST = 'FETCH_CHEESES_REQUEST';
 export const fetchCheesesRequest = () => ({
@@ -20,7 +20,7 @@ export const fetchCheesesError = (error) => ({
 export const fetchCheeses = () => dispatch => {
     dispatch(fetchCheesesRequest());
 
-    fetch('https://fullstack-primer.herokuapp.com/cheeses')
+    fetch(API_URL)
     .then(response => response.json())
     .then(data => {
       dispatch(fetchCheesesSuccess(data.cheeses));

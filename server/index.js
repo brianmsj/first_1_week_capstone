@@ -3,8 +3,8 @@ import express from 'express';
 const bodyParser = require('body-parser');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || 8080;
-DATABASE_URL = process.env.DATABASE_URL ||
-                       global.DATABASE_URL;
+const DATABASE_URL = process.env.DATABASE_URL ||
+                       global.DATABASE_URL || 'mongodb://localhost/fullstack-primer'; 
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
