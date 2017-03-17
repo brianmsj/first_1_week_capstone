@@ -28,5 +28,4 @@ export const fetchCheeses = () => dispatch => {
     .catch(error => {
       dispatch(fetchCheesesError(error));
     })
-  }
 }

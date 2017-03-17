@@ -1,19 +1,22 @@
 import 'babel-polyfill';
-
-console.log(`Client running in ${process.env.NODE_ENV} mode`);
-
 import React from 'react';
 import CheeseList from './components/cheese-list';
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+import store from './store';
 
-const newCheese = [
-    "Bath Blue",
-    "Barkham Blue",
-    "Buxton Blue"
-];
+console.log(`Client running in ${process.env.NODE_ENV} mode`);
+
+// const newCheese = [
+//     "Bath Blue",
+//     "Barkham Blue",
+//     "Buxton Blue"
+// ];
 document.addEventListener('DOMContentLoaded', () =>
   ReactDOM.render(
-    <CheeseList cheeses={newCheese} />,
+    <Provider store={store}>
+      <CheeseList />
+    </Provider>,
     document.getElementById('app')
   )
 );
