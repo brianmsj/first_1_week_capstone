@@ -1,7 +1,7 @@
 import {
   FETCH_CHEESES_REQUEST,
   FETCH_CHEESES_SUCCESS,
-  FETCH_CHEESES_ERROR
+  FETCH_CHEESES_ERROR,
 } from '../actions/cheese';
 
 const initialState = {
@@ -12,17 +12,21 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type){
-    case (FETCH_CHEESES_REQUEST):
+
+    case FETCH_CHEESES_REQUEST:
       return Object.assign({}, state, {loading: true});
-    case (FETCH_CHEESES_SUCCESS):
+
+    case FETCH_CHEESES_SUCCESS:
       return Object.assign({}, state, {
         error: null,
         loading: false,
         cheeses: action.cheeses
       });
-    case (FETCH_CHEESES_ERROR):
+
+    case FETCH_CHEESES_ERROR:
       return Object.assign({}, state, {loading: false, error: action.error});
+
     default:
-      console.log('action.type not supported.');
+      return state;
   }
 }
