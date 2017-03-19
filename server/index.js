@@ -21,8 +21,9 @@ app.get('/houses', (req, res) => {
   .find()
   .exec()
   .then(data => res.json(data)
-  .catch(console.error);
-});
+  .catch(console.error)
+)}
+);
 
 
 //get, post, put, delete functions here
