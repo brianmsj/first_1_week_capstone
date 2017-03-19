@@ -1,13 +1,14 @@
 const mongoose = require('mongoose');
 
-// this is our schema to represent a restaurant
-const cheeseSchema = mongoose.Schema({
-  types: [String]
+
+const housingSchema = mongoose.Schema({
+  types: String
 })
 
+// virtuals
+// api reps
 
-// note that all instance methods and virtual properties on our
-// schema must be defined *before* we make the call to `.model`.
-const Cheese = mongoose.model('Cheese', cheeseSchema);
 
-module.exports = {Cheese};
+const Houses = mongoose.model('Houses', housingSchema);
+
+module.exports = {Houses};

@@ -4,11 +4,11 @@ const bodyParser = require('body-parser');
 const HOST = process.env.HOST;
 const PORT = process.env.PORT || 8080;
 const DATABASE_URL = process.env.DATABASE_URL ||
-                       global.DATABASE_URL || 'mongodb://localhost/fullstack-primer';
+                       global.DATABASE_URL || 'mongodb://userhouse:data@ds137090.mlab.com:37090/housingdata';
 const router = express.Router();
 const jsonParser = bodyParser.json();
 const mongoose = require('mongoose');
-const {Cheese} = require('./models');
+const {Houses} = require('./models');
 
 console.log(`Server running in ${process.env.NODE_ENV} mode`);
 
@@ -16,14 +16,17 @@ const app = express();
 
 app.use(express.static(process.env.CLIENT_PATH));
 
-
-app.get('/cheeses', (req, res) => {
-  Cheese
+app.get('/houses', (req, res) => {
+  Houses
   .find()
   .exec()
-  .then(cheeses => res.json({ cheeses: cheeses[0].types }))
+  .then(data => res.json(data)
   .catch(console.error);
 });
+
+
+//get, post, put, delete functions here
+
 
 function runServer() {
     return new Promise((resolve, reject) => {
