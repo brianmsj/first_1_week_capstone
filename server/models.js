@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 
 
 const housingSchema = mongoose.Schema({
-  types: String
+
+  title: {type: String, required: true},
+  url: {type: String, required: true},
+  location: String,
+  price: {type: String, required: true},
+  description: String,
+  accomodates: Number
+
+
 })
 
 // virtuals
