@@ -18,12 +18,11 @@ app.use(express.static(process.env.CLIENT_PATH));
 
 app.get('/houses', (req, res) => {
   Houses
-  .find()
+  .findOne()
   .exec()
-  .then(data => res.json(data)
+  .then(data => res.json(data))
   .catch(console.error)
-)}
-);
+});
 
 
 //get, post, put, delete functions here

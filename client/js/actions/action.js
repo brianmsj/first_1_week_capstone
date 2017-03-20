@@ -22,7 +22,7 @@ export const fetchHouses = () => dispatch => {
     fetch('http://localhost:8080/houses')
     .then(response => response.json())
     .then(json => {
-      console.log(json[0])
+      console.log(json)
       dispatch(fetchHousesSuccess(json[0].title,json[0].url,json[0].location,json[0].price,json[0].description,json[0].accomodates));
     })
 }
